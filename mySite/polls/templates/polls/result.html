@@ -1,0 +1,12 @@
+{% extends 'polls/base.html'%}
+{% block content1%}
+    {% if q %}
+        <h1>{{ q.question_text }}</h1>
+        <h2>kết quả:</h2>
+        {% for i in q.choice_set.all %}
+                <p>{{ i.choice }}: {{ i.vote }}</p>
+        {% endfor %}
+    {% endif %}
+    <a href="{% url 'list_q' %}">Vote tiếp</a>
+
+{% endblock %}
