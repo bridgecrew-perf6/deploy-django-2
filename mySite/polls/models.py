@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.fields import BooleanField, CharField, FloatField
 
 
 # Create your models here.
@@ -16,3 +17,16 @@ class Choice(models.Model):
 class Login(models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=255)
+
+class Categories(models.Model):
+    category_name = CharField(max_length=255)
+    category_in = CharField(max_length=255,null=True)
+
+class Products(models.Model):
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    product_name = CharField(max_length=255)
+    price = FloatField(default=0)
+    discription = CharField(max_length=1000)
+    url_images = CharField(max_length=1000)
+    taitle = CharField(max_length=1000)
+    status = BooleanField()

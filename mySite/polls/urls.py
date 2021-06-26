@@ -9,5 +9,8 @@ urlpatterns = [
     path('page2/', views.pages2, name='page2'),
     path('list/', views.viewQuestion, name='list_q'),
     path('<int:question_id>/', views.vote, name='vote'),
-    path('home/', views.eventLogin, name='elogin')
+    path('home/', views.eventLogin, name='elogin'),
+    path('shop/', views.shop, name='shop'),
+    path('shop/<int:product_id>/', views.viewProductById, name='byid')
 ]
+    

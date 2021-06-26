@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Question, Login
+from .models import Question, Login, Categories, Products
 from django.http import HttpResponse
 
 
@@ -55,3 +55,27 @@ def eventLogin(request):
         else:
             content['status'] = 0
             return render(request, 'polls/login.html', content)
+
+
+def shop(request):
+    categories = Categories.objects.all()
+    products = Products.objects.all()
+    cate_in = []
+    for i in categories:
+        cate_in.append(str(i.category_in).split(','))
+        context = {'categoris': categories, 'cate_in': cate_in}
+    context['products'] = products
+    return render(request, 'polls/product.html', context)
+
+def viewProductById(request, product_id):
+    categories = Categories.objects.all()
+    producr = Categories.objects.get(pk= product_id)
+    pro = producr.products_set.all()
+    cate_in = []
+    for i in categories:
+        cate_in.append(str(i.category_in).split(','))
+        context = {'categoris': categories, 'cate_in': cate_in, "products": pro}
+    
+
+
+    return render(request, 'polls/product.html', context)
