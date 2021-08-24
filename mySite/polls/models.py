@@ -15,8 +15,12 @@ class Choice(models.Model):
 
 
 class Login(models.Model):
-    username = models.CharField(max_length=50)
+    username = models.CharField(max_length=50, primary_key=True)
     password = models.CharField(max_length=255)
+
+    def __str__(self) :
+        return self.username
+
 
 class Categories(models.Model):
     category_name = CharField(max_length=255)
@@ -30,3 +34,7 @@ class Products(models.Model):
     url_images = CharField(max_length=1000)
     taitle = CharField(max_length=1000)
     status = BooleanField()
+
+
+class Cart(models.Model):
+    pass

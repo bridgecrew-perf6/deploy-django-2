@@ -43,9 +43,9 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="{{producct.url_images}}"  alt=""/>
+                                    <img src="{{producct.url_images}}"  alt="" href="{% url 'detail' producct.id %}"/>
                                     <h2>${{producct.price}}</h2>
-                                    <p>{{producct.product_name}}</p>
+                                    <p><a href="">{{producct.product_name}}</a></p>
                                     <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
                                         to cart</a>
                                 </div>

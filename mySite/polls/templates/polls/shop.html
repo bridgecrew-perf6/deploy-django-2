@@ -62,7 +62,7 @@
             <div class="row">
                 <div class="col-md-4 clearfix">
                     <div class="logo pull-left">
-                        <a href="index.html"><img src="{% static 'polls/images/home/logo.png' %}" alt=""/></a>
+                        <a href="{% url 'shop' %}"><img src="{% static 'polls/images/home/logo.png' %}" alt=""/></a>
                     </div>
                     <div class="btn-group pull-right clearfix">
                         <div class="btn-group">
@@ -94,8 +94,13 @@
                             <li><a href=""><i class="fa fa-user"></i> Account</a></li>
                             <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                            <li><a href="{% url 'login'%}"><i class="fa fa-lock"></i> Login</a></li>
+                            <li><a href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                            {% if username == null %}
+                            <li><a href="{% url 'login' %}"><i class="fa fa-lock"></i> Login</a></li>
+                            {% else %}
+                            <li><a href="{% url 'login' %}"><i class="fa fa-lock"></i> {{ username }}</a></li>
+                            {% endif %}
+                            
                         </ul>
                     </div>
                 </div>

@@ -5,67 +5,61 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-def index(request):
-    myname = "Thắng"
-    item = ["Điện thoại", "Xe máy"]
-    context = {"name": myname, "item": item}
-    return render(request, "polls/index.html", context)
-
-
-def pages2(request):
-    return render(request, 'polls/base.html')
-
-
-def viewQuestion(request):
-    listquestion = Question.objects.all()
-    contect = {'listques': listquestion}
-    return render(request, 'polls/fillData.html', contect)
-
-
-def detailView(request, question_id):
-    q = Question.objects.get(pk=question_id)
-    context = {'qs': q}
-    return render(request, 'polls/detailview.html', context)
-
-
-def vote(request, question_id):
-    q = Question.objects.get(pk=question_id)
-
-    data = request.POST["choice"]
-    c = q.choice_set.get(pk=data)
-
-    c.vote = c.vote + 1
-    c.save()
-    return render(request, 'polls/result.html', {'q': q})
-
-
 def login(request):
     return render(request, 'polls/login.html')
-
 
 def eventLogin(request):
     logindata = Login.objects.all()
     username = request.POST['username']
-    password = request.POST['pass']
-    content = {'status': 0}
-    for i in logindata:
+    password = request.POST['password']
+    
+    #context = {'status': 0, 'username': ''}
+    context = showAllProduct()
+    for i in logindata: 
         if username == i.username and password == i.password:
-            content['status'] = 1
-            return render(request, 'polls/index.html', content)
+            context['status'] = 1
+            context['username'] = i.username
+            return render(request, 'polls/product.html', context)    
         else:
-            content['status'] = 0
-            return render(request, 'polls/login.html', content)
+            context['status'] = 0
+    if context['status'] == 0:
+        return render(request, 'polls/login.html', context)
+    else:
+        return render(request, 'polls/product.html', context)
+
+def sign_up(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    pass_again = request.POST['password_again']
+
+    content = showAllProduct()
+    try:
+        if password == pass_again:
+            insert = Login.objects.create(username = username, password = password)
+            content['status1'] = 1
+            content['username'] = username
+            return render(request, 'polls/product.html', content)
+    except:
+        content['status1'] = 0
+        return render(request, 'polls/login.html', content)
+
+
 
 
 def shop(request):
+    context = showAllProduct() 
+    return render(request, 'polls/product.html', context)
+
+def showAllProduct():
     categories = Categories.objects.all()
     products = Products.objects.all()
     cate_in = []
+    context ={}
     for i in categories:
         cate_in.append(str(i.category_in).split(','))
         context = {'categoris': categories, 'cate_in': cate_in}
     context['products'] = products
-    return render(request, 'polls/product.html', context)
+    return context
 
 def viewProductById(request, product_id):
     categories = Categories.objects.all()
@@ -75,7 +69,13 @@ def viewProductById(request, product_id):
     for i in categories:
         cate_in.append(str(i.category_in).split(','))
         context = {'categoris': categories, 'cate_in': cate_in, "products": pro}
-    
-
-
     return render(request, 'polls/product.html', context)
+
+def product_detail(request, id_product):
+    product = Products.objects.get(pk=id_product)
+    
+    content = {'product': product}
+    return render(request, 'polls/product_detail.html',content)
+    
+def cart(request):
+    return render(request, 'polls/cart.html')
