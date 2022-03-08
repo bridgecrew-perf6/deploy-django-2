@@ -95,7 +95,7 @@
                             <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                             <li><a href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                            {% if username == null %}
+                            {% if username == '' %}
                             <li><a href="{% url 'login' %}"><i class="fa fa-lock"></i> Login</a></li>
                             {% else %}
                             <li><a href="{% url 'login' %}"><i class="fa fa-lock"></i> {{ username }}</a></li>
@@ -283,5 +283,6 @@
 <script src="{% static 'polls/js/price-range.js' %}"></script>
 <script src="{% static 'polls/js/jquery.prettyPhoto.js' %}"></script>
 <script src="{% static 'polls/js/main.js' %}"></script>
+<script src="{% static 'polls/js/index.js' %}"></script>
 </body>
 </html>

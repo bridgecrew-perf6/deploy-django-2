@@ -716,7 +716,13 @@ h2.title:before {
     font-size: 14px;
     text-decoration: none;
     text-transform: uppercase;
+    
 }
+
+.panel-title{
+    cursor: pointer;
+}
+
 
 .panel-group .panel-heading+.panel-collapse .panel-body {
     border-top: 0 none;

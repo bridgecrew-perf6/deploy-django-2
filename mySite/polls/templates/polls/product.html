@@ -1,64 +1,45 @@
 {% extends 'polls/shop.html' %}
 
 {% block category %}
-{% if  cate_in == 'null'%}    
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">Kids</a></h4>
-                            </div>
-                        </div>
-                        {% else %}
-                        {% for item in categoris  %}
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a  href="{% url 'byid' item.id%}">
-                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        {{item.category_name}}
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="Sportswear" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul>
-                                    {% for i in cate_in %}
-                                    {% for x in i %}
-                                    <li><a href="#">{{x}} </a></li>
-                                    {% endfor %}
-                                        
-                                    {% endfor %}
-                                        
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                        {% endif %}
+{% if  cate_in == 'null'%}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title"><a href="#">Kids</a></h4>
+    </div>
+</div>
+{% else %}
+{% for item in categoris  %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a onclick="return getProductById({{item.id}});">
+                <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                {{item.category_name}}
+            </a>
+        </h4>
+    </div>
+    <div id="Sportswear" class="panel-collapse collapse">
+        <div class="panel-body">
+            <ul>
+                {% for i in cate_in %}
+                {% for x in i %}
+                <li><a href="#">{{x}} </a></li>
+                {% endfor %}
+
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
 {% endblock category %}
 
 {% block product %}
-<body>
-{% for producct in products %}
-                    <div class="col-sm-4">
-                        <div class="product-image-wrapper">
-                            <div class="single-products">
-                                <div class="productinfo text-center">
-                                    <img src="{{producct.url_images}}"  alt="" href="{% url 'detail' producct.id %}"/>
-                                    <h2>${{producct.price}}</h2>
-                                    <p><a href="">{{producct.product_name}}</a></p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
-                                        to cart</a>
-                                </div>
 
-                            </div>
-                            <div class="choose">
-                                <ul class="nav nav-pills nav-justified">
-                                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-</body>
+    <div id="product">
+        
+    </div>
+
 {% endblock product %}

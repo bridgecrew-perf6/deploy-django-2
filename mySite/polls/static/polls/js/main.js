@@ -10,6 +10,8 @@ var RGBChange = function () {
 
 /*scroll to top*/
 
+
+
 $(document).ready(function () {
     $(function () {
         $.scrollUp({
@@ -29,4 +31,6 @@ $(document).ready(function () {
             zIndex: 2147483647 // Z-Index for the overlay
         });
     });
+
+
 });
